@@ -276,7 +276,9 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
         _senderViewForAnimation.hidden = (_currentPageIndex == _initalPageIndex);
         
         _isdraggingPhoto = YES;
-        [self setNeedsStatusBarAppearanceUpdate];
+        if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
+            [self setNeedsStatusBarAppearanceUpdate];
+        }
     }
     
     translatedPoint = CGPointMake(firstX, firstY+translatedPoint.y);
@@ -322,7 +324,9 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
         else // Continue Showing View
         {
             _isdraggingPhoto = NO;
-            [self setNeedsStatusBarAppearanceUpdate];
+            if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
+                [self setNeedsStatusBarAppearanceUpdate];
+            }
             
             self.view.backgroundColor = [UIColor colorWithWhite:(_useWhiteBackgroundColor ? 1 : 0) alpha:1];
             
@@ -1168,7 +1172,9 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
 	// Will cancel existing timer but only begin hiding if they are visible
 	if (!permanent) [self hideControlsAfterDelay];
     
-    [self setNeedsStatusBarAppearanceUpdate];
+    if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
+        [self setNeedsStatusBarAppearanceUpdate];
+    }
 }
 
 - (void)cancelControlHiding {
